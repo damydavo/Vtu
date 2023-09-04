@@ -9,7 +9,7 @@ const Electricity = () => {
 
     useEffect(() => {
         dispatch(getElectricityCategory())
-    }, [])
+    }, [dispatch])
 
     const { electricity } = useSelector((state) => state.variations)
 

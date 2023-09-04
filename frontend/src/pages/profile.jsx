@@ -11,7 +11,7 @@ const Profile = () => {
 
     useEffect(() => {
         dispatch(getWallet())
-    }, [])
+    }, [dispatch])
 
     const { wallet } = useSelector((state) => state.variations)
     return (

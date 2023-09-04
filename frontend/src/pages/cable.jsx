@@ -8,7 +8,7 @@ const Cable = () => {
 
     useEffect(() => {
         dispatch(getTvCategory())
-    }, [])
+    }, [dispatch])
 
     const { cable } = useSelector((state) => state.variations)
     return (

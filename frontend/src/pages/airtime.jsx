@@ -8,7 +8,7 @@ const AirTime = () => {
 
     useEffect(() => {
         dispatch(getAirtimeCategory())
-    }, [])
+    }, [dispatch])
 
     const { airtime } = useSelector((state) => state.variations)
 

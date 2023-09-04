@@ -6,7 +6,7 @@ import { getMtn, getAirtel, getGlo, getMobile, reset } from "../features/vtu/vtu
 
 
 const Category = () => {
-    const { mtn, airtel, glo, mobile, isSuccess, message } = useSelector((state) => (state.variations))
+    const { mtn, airtel, glo, mobile, isSuccess } = useSelector((state) => (state.variations))
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -15,14 +15,14 @@ const Category = () => {
                 dispatch(reset())
             }
         }
-    }, [])
+    }, [isSuccess, dispatch])
 
     useEffect(() => {
         dispatch(getMtn())
         dispatch(getAirtel())
         dispatch(getGlo())
         dispatch(getMobile())
-    }, [])
+    }, [dispatch])
 
     return (
 
