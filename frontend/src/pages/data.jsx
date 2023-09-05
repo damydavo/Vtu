@@ -9,7 +9,7 @@ const Data = () => {
 
     useEffect(() => {
         dispatch(getDataCategory())
-    }, [dispatch])
+    }, [])
 
     const { data } = useSelector((state) => state.variations)
 
