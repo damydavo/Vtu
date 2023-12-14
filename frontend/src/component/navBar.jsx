@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sunking, close, menu2 } from "../asset";
+import { close, menu2 } from "../asset";
 import { navLink } from "../constants";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const NavBar = () => {
 
     return (
         <nav className="flex justify-between items-center py-3 px-3 w-full">
-            <Link to='/'><img className="w-[124px] h-[32px]" src={sunking} alt="sun king" /></Link>
+            <Link to='/'><h2 className="font-bold">Dvtu</h2></Link>
 
             <ul className="hidden sm:flex justify-end items-center list-none">
                 {navLink.map((nav, index) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { sunking, visibility } from "../asset";
+import { visibility } from "../asset";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux'
@@ -63,7 +63,7 @@ const Register = () => {
     return (
         <div className="block p-8 md:p-0 md:flex items-center justify-center my-18 md:my-28 space-x-0 md:space-x-12">
             <div className="block space-y-3 w-80 md:w-96 my-8">
-                <Link to='/'><img className="w-[130px] h-[32px]" src={sunking} alt="sun king" /></Link>
+                <Link to='/'><h2 className="font-bold">Dvtu</h2></Link>
                 <p className="text-xl md:text-lg">Welcome to Sun King to get started, please register</p>
             </div>
 

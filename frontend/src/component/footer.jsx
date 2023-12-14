@@ -1,4 +1,3 @@
-import { sunking } from "../asset";
 import { Link } from "react-router-dom";
 import { navLink } from "../constants";
 
@@ -7,7 +6,7 @@ const Footer = () => {
         <div className="bg-[#242D52] px-8">
             <div className="flex flex-col-reverse justify-between space-y-8 md:space-y-0 md:flex-row container mx-auto py-10 md:px-0">
                 <div className="flex flex-col space-y-4 items-center md:items-start">
-                    <Link to='/'><img className="w-[124px] h-[32px]" src={sunking} alt="sun king" /></Link>
+                    <Link to='/'><h2 className="font-bold">Dvtu</h2></Link>
                     <p className="flex text-white w-[400px] px-8">We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment and more.</p>
                 </div>
                 <div className="">

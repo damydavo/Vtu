@@ -20,7 +20,7 @@ const Cable = () => {
 
                 </div>
                 <section className="mt-4">
-                    <form className="w-full space-y-4">
+                    <form className="w-full space-y-4 px-10">
 
                         <label className="block">
                             <span className="block text-sm font-medium text-slate-700">Category</span>
@@ -34,7 +34,7 @@ const Cable = () => {
 
                             </select>
                         </label>
-                        <div className='flex gap-8 items-center'>
+                        <div className='block md:flex gap-8 items-center'>
                             <label className="block">
                                 <span className="block text-sm font-medium text-slate-700">Mobile Number</span>
                                 <input type="text"

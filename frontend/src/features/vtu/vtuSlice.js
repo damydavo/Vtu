@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import vtuService from "./vtuService";
 
-
 const initialState = {
     mtn: {},
     airtel: {},
@@ -12,6 +11,9 @@ const initialState = {
     data: [],
     electricity: [],
     cable: [],
+    buy: {},
+    airtym: {},
+    meter: {},
     isSuccess: false,
     message: ''
 }
@@ -80,6 +82,7 @@ export const getWallet = createAsyncThunk('getWallet', async (thunkAPI) => {
         return thunkAPI.rejectWithValue(message)
     }
 })
+
 // get airtime categories
 export const getAirtimeCategory = createAsyncThunk('getAirtimeCategory', async (thunkAPI) => {
     try {
@@ -126,6 +129,45 @@ export const getTvCategory = createAsyncThunk('getTvCategory', async (thunkAPI) 
     }
     catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
+            || error.message || error.toString()
+
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+//buy data
+export const buyData = createAsyncThunk('data/buy', async (vtuData, thunkAPI) => {
+    try {
+        return await vtuService.buyData(vtuData)
+    }
+    catch (error) {
+        const message = (error.response_description && error.response.data && error.response.data.message)
+            || error.message || error.toString()
+
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+//buy airtime
+export const buyAirtime = createAsyncThunk('airtime/buy', async (vtuAirtime, thunkAPI) => {
+    try {
+        return await vtuService.buyData(vtuAirtime)
+    }
+    catch (error) {
+        const message = (error.response_description && error.response.data && error.response.data.message)
+            || error.message || error.toString()
+
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+//buy airtime
+export const verifyMeter = createAsyncThunk('meter/verify', async (meterInput, thunkAPI) => {
+    try {
+        return await vtuService.buyData(meterInput)
+    }
+    catch (error) {
+        const message = (error.response_description && error.response.data && error.response.data.message)
             || error.message || error.toString()
 
         return thunkAPI.rejectWithValue(message)
@@ -250,6 +292,48 @@ export const vtuSlice = createSlice({
             })
             .addCase(getTvCategory.rejected, (state) => {
                 state.cable = null
+            })
+            .addCase(buyData.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(buyData.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.buy = action.payload
+            })
+            .addCase(buyData.rejected, (state, action) => {
+                state.buy = null
+                state.isError = true
+                state.message = action.payload
+
+            })
+            .addCase(buyAirtime.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(buyAirtime.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.airtym = action.payload
+            })
+            .addCase(buyAirtime.rejected, (state, action) => {
+                state.airtym = null
+                state.isError = true
+                state.message = action.payload
+
+            })
+            .addCase(verifyMeter.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(verifyMeter.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.meter = action.payload
+            })
+            .addCase(verifyMeter.rejected, (state, action) => {
+                state.meter = null
+                state.isError = true
+                state.message = action.payload
+
             })
 
     }

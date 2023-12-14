@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 const userSchema = mongoose.Schema({
     name: {
         type: String,
+
         require: true
     },
     email: {
@@ -14,7 +15,10 @@ const userSchema = mongoose.Schema({
         type: String,
         require: true
     },
-
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
 },
     {
         timestamps: true

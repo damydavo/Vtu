@@ -1,4 +1,4 @@
-import sunking from './sunking.webp'
+import Dam from './sunking.webp'
 import menu from './menu.svg'
 import menu2 from './menu2.svg'
 import close from './close.svg'
@@ -42,7 +42,7 @@ import cabtv from './cable.png'
 
 
 export {
-    sunking,
+    Dam,
     menu,
     menu2,
     close,
