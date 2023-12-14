@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 
 dotenv.config()
 connectDB()
+const __dirname = path.resolve();
 
 app.use('/api/users', userRoute)
 app.use('/api/data', dataRoute)
