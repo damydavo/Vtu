@@ -20,22 +20,16 @@ app.use('/api/users', userRoute)
 app.use('/api/data', dataRoute)
 
 if (process.env.NODE_ENV === "production") {
-    const path = require("path");
-    app.use(express.static(path.resolve(__dirname, 'frontend', 'build')));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'), function (err) {
-            if (err) {
-                res.status(500).send(err)
-            }
-        });
+    app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+    app.get('*', (req, res) => res.sendFile(__dirname, '../', 'frontend', build, 'index.html'))
+}
+else {
+    app.get('/', (req, res) => {
+        res.status(200).json({ message: "Welcome to VTU application" })
     })
 }
 
-// app.use(express.static(path.join(__dirname, '/frontend/build')))
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, "frontend", 'build', 'index.html'))
-// })
 
 app.use(notFound);
 app.use(errorHandler)
