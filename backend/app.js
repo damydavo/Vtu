@@ -15,16 +15,27 @@ app.use(express.urlencoded({ extended: true }))
 
 dotenv.config()
 connectDB()
-const __dirname = path.resolve();
 
 app.use('/api/users', userRoute)
 app.use('/api/data', dataRoute)
 
-app.use(express.static(path.join(__dirname, '/frontend/build')))
+if (process.env.NODE_ENV === "production") {
+    const path = require("path");
+    app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'), function (err) {
+            if (err) {
+                res.status(500).send(err)
+            }
+        });
+    })
+}
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", 'build', 'index.html'))
-})
+// app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, "frontend", 'build', 'index.html'))
+// })
 
 app.use(notFound);
 app.use(errorHandler)
