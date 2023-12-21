@@ -13,7 +13,6 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-
 dotenv.config()
 connectDB()
 
@@ -25,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
 
     app.get('*', (req, res) => res.sendFile(__dirname, '../', 'frontend', build, 'index.html'))
 }
-else {
+else { 
     app.get('/', (req, res) => {
         res.status(200).json({ message: "Welcome to VTU application" })
     })
