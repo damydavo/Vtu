@@ -17,27 +17,28 @@ dotenv.config();
 connectDB();
 
 app.use((req, res, next) => {
-    if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
+    if (req.originalUrl && req.originalUrl.split('/').pop() === 'favicon.ico') {
         return res.sendStatus(204);
     }
+
     return next();
 });
 
-
+// API routes
 app.use('/api/users', userRoute);
 app.use('/api/data', dataRoute);
 
+// Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, './frontend/build')));
-    app.get('*', (req, res) => res.sendFile(path.join(__dirname, './frontend/build/index.html')));
+    // Set static folder
+    app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    });
 }
 
 app.use(notFound);
 app.use(errorHandler);
 
-export default app;
-
-// For local development
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(port, () => console.log(`App is listening on port ${port}`));
-}
+app.listen(port, () => console.log(`App is listening on port ${port}`));
