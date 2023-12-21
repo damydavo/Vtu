@@ -17,8 +17,6 @@ app.use(express.urlencoded({ extended: true }))
 dotenv.config()
 connectDB()
 
-app.use('/api/users', userRoute)
-app.use('/api/data', dataRoute)
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, '../frontend/build')));
@@ -31,6 +29,10 @@ else {
         res.status(200).json({ message: "Welcome to VTU application" })
     })
 }
+
+app.use('/api/users', userRoute)
+app.use('/api/data', dataRoute)
+
 
 app.use(notFound);
 app.use(errorHandler)
