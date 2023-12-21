@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 // Handle root path ("/") by redirecting to "/api/users"
 app.get('/', (req, res) => {
-    res.redirect('/api/users');
+    res.redirect('/');
 });
 
 app.use('/api/users', userRoute);
