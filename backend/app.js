@@ -17,6 +17,15 @@ app.use(express.urlencoded({ extended: true }))
 dotenv.config()
 connectDB()
 
+app.use((req, res, next) => {
+    if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
+        return res.sendStatus(204);
+    }
+
+    return next();
+});
+
+
 app.use('/api/users', userRoute)
 app.use('/api/data', dataRoute)
 
