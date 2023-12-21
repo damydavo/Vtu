@@ -23,6 +23,11 @@ app.use((req, res, next) => {
     return next();
 });
 
+// Handle root path ("/") by redirecting to "/api/users"
+app.get('/', (req, res) => {
+    res.redirect('/api/users');
+});
+
 app.use('/api/users', userRoute);
 app.use('/api/data', dataRoute);
 
@@ -36,5 +41,7 @@ app.use(errorHandler);
 
 export default app;
 
-
-app.listen(port, () => console.log(`App is listening on port ${port}`));
+// For local development
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => console.log(`App is listening on port ${port}`));
+}
