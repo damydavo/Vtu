@@ -23,17 +23,13 @@ app.use((req, res, next) => {
     return next();
 });
 
-// Handle root path ("/") by redirecting to "/api/users"
-app.get('/', (req, res) => {
-    res.redirect('/');
-});
 
 app.use('/api/users', userRoute);
 app.use('/api/data', dataRoute);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'frontend/build')));
-    app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'frontend/build/index.html')));
+    app.use(express.static(path.join(__dirname, './frontend/build')));
+    app.get('*', (req, res) => res.sendFile(path.join(__dirname, './frontend/build/index.html')));
 }
 
 app.use(notFound);
