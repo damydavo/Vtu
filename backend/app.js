@@ -27,8 +27,9 @@ app.use('/api/users', userRoute);
 app.use('/api/data', dataRoute);
 
 app.get('/', (req, res) => {
-    res.send('Hello, this is the root path!');
+    res.redirect('/api/users');
 });
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'frontend/build')));
