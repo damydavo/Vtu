@@ -10,30 +10,31 @@ import userRoute from './routes/userRoute.js'
 import dataRoute from './routes/dataRoute.js'
 
 const app = express();
-app.use(express.static('public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 dotenv.config()
 connectDB()
 
-app.use((req, res, next) => {
-    if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
-        return res.sendStatus(204);
-    }
-
-    return next();
-});
-
-
 app.use('/api/users', userRoute)
 app.use('/api/data', dataRoute)
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(process.cwd(), 'frontend/build')));
-    app.get('*', (req, res) => res.sendFile(path.join(process.cwd(), 'frontend/build/index.html')));
+const path = require('path');
+const express = require('express');
+const app = express();
 
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('frontend/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
 }
+
+// Your server listening code
+
 
 app.use(notFound);
 app.use(errorHandler)
