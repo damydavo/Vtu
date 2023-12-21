@@ -31,16 +31,19 @@ app.use('/api/data', dataRoute);
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    app.use(express.static(path.join(__dirname, 'frontend/build')));
+    const staticPath = path.join(process.cwd(), 'frontend/build');
+    app.use(express.static(staticPath));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+        const indexPath = path.join(staticPath, 'index.html');
+        res.sendFile(indexPath);
     });
 }
 
-// Add a default route for the root URL
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+// Handle other routes by serving the index.html
+app.use((req, res) => {
+    const indexPath = path.join(process.cwd(), 'frontend/build', 'index.html');
+    res.sendFile(indexPath);
 });
 
 app.use(notFound);
