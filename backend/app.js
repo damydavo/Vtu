@@ -26,11 +26,6 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoute);
 app.use('/api/data', dataRoute);
 
-app.get('/', (req, res) => {
-    res.redirect('/api/users');
-});
-
-
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'frontend/build')));
     app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'frontend/build/index.html')));
