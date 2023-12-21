@@ -19,10 +19,6 @@ connectDB()
 app.use('/api/users', userRoute)
 app.use('/api/data', dataRoute)
 
-const path = require('path');
-const express = require('express');
-const app = express();
-
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
