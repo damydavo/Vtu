@@ -31,9 +31,12 @@ app.use('/api/data', dataRoute);
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    const staticPath = path.join(process.cwd(), 'frontend/build');
+    const staticPath = path.join(process.cwd(), 'frontend', 'build');
+
+    // Serve static files
     app.use(express.static(staticPath));
 
+    // Serve the index.html for any other route
     app.get('*', (req, res) => {
         const indexPath = path.join(staticPath, 'index.html');
         res.sendFile(indexPath);
@@ -42,9 +45,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // Handle other routes by serving the index.html
 app.use((req, res) => {
-    const indexPath = path.join(process.cwd(), 'frontend/build', 'index.html');
+      const indexPath = path.join(process.cwd(), 'frontend', 'build', 'index.html');
     res.sendFile(indexPath);
-});
+  });
 
 app.use(notFound);
 app.use(errorHandler);
