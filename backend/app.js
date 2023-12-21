@@ -31,23 +31,23 @@ app.use('/api/data', dataRoute);
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    const staticPath = path.join(process.cwd(), 'frontend', 'build');
+    app.use(express.static(path.join(__dirname, 'frontend/build')));
 
-    // Serve static files
-    app.use(express.static(staticPath));
-
-    // Serve the index.html for any other route
     app.get('*', (req, res) => {
-        const indexPath = path.join(staticPath, 'index.html');
-        res.sendFile(indexPath);
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     });
 }
 
 // Handle other routes by serving the index.html
 app.use((req, res) => {
-      const indexPath = path.join(process.cwd(), 'frontend', 'build', 'index.html');
-    res.sendFile(indexPath);
+      res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
+
+app.use(notFound);
+app.use(errorHandler);
+
+app.listen(port, () => console.log(`App is listening on port ${port}`));
+
 
 app.use(notFound);
 app.use(errorHandler);
