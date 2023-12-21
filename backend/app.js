@@ -39,3 +39,6 @@ app.use(notFound);
 app.use(errorHandler);
 
 export default app;
+
+
+app.listen(port, () => console.log(`App is listening on port ${port}`));
