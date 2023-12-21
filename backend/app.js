@@ -40,16 +40,12 @@ if (process.env.NODE_ENV === 'production') {
 
 // Handle other routes by serving the index.html
 app.use((req, res) => {
-      res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+});
 
 app.use(notFound);
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`App is listening on port ${port}`));
 
-
-app.use(notFound);
-app.use(errorHandler);
-
-app.listen(port, () => console.log(`App is listening on port ${port}`));
+export default app; // Export the app for Cyclic deployment
