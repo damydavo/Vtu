@@ -21,12 +21,11 @@ app.use('/api/data', dataRoute)
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('frontend/build'));
+  app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
 }
 
 // Your server listening code
