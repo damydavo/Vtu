@@ -10,6 +10,7 @@ import userRoute from './routes/userRoute.js'
 import dataRoute from './routes/dataRoute.js'
 
 const app = express();
+app.use(express.static('public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
